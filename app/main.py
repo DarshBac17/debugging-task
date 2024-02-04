@@ -21,13 +21,13 @@ def read_user():
 def read_questions(position: int, response: Response):
     question = api.read_questions(position)
 
-    if question:
+    if not question:
         raise HTTPException(status_code=400, detail="Error")
 
     return question
 
 
-@app.get("/alternatives/question_id")
+@app.get("/alternatives/{question_id}")
 def read_alternatives(question_id: int):
     return api.read_alternatives(question_id)
 

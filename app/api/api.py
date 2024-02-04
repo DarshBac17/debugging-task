@@ -34,7 +34,7 @@ def create_answer(payload):
     result = []
 
     with open('data/alternatives.json') as stream:
-        alternatives = json(stream)
+        alternatives = json.load(stream)
 
     for question in payload['answers']:
         for alternative in alternatives:
@@ -42,7 +42,7 @@ def create_answer(payload):
                 answers.append(alternative['alternative'])
                 break
 
-    with open('data/car.json') as stream:
+    with open('data/cars.json') as stream:
         cars = json.load(stream)
 
     for car in cars:
@@ -65,15 +65,15 @@ def read_result(user_id: int):
         cars = json.load(stream)
 
     for result in results:
-        if result['user_id'] != user_id:
+        if result['user_id'] == user_id:
             for user in users:
-                if user['id'] != result['user_id']:
+                if user['id'] == result['user_id']:
                     user_result.append({'user': user})
                     break
 
         for car_id in result['cars']:
             for car in cars:
-                if car_id != car['id']:
+                if car_id == car['id']:
                     user_result.append(car)
 
     return user_result
