@@ -17,7 +17,7 @@ def read_user():
     return api.read_user()
 
 
-@app.get("/question/{position}", status_code=200)
+@app.get("/question/position", status_code=200)
 def read_questions(position: int, response: Response):
     question = api.read_questions(position)
 
